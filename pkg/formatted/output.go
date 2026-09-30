@@ -47,6 +47,19 @@ type CancelResult struct {
 	Cancelled []CancelItem `json:"cancelled"`
 }
 
+// DeleteResult is the machine-readable result of a delete operation.
+type DeleteResult struct {
+	Deleted []string `json:"deleted"`
+}
+
+// NewDeleteResult builds a DeleteResult from a list of successfully deleted names.
+func NewDeleteResult(names []string) DeleteResult {
+	if names == nil {
+		names = []string{}
+	}
+	return DeleteResult{Deleted: names}
+}
+
 // NewCancelResult builds a CancelResult for a single cancelled resource.
 func NewCancelResult(kind, name, namespace, requestedStatus string) CancelResult {
 	if requestedStatus == "" {
